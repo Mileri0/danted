@@ -49,6 +49,13 @@ external: ${ipaddr}
 EOF
 }
 
+add_rotation(){
+    cat <<EOF
+external.rotation: same-same
+
+EOF
+}
+
 generate_config_iplist(){
     local ipaddr_list="$1"
     local port="$2"
@@ -63,7 +70,7 @@ generate_config_iplist(){
     ipaddr_array=("$ipaddr_list")
 
     if [ ${#ipaddr_array[@]} -gt 1 ];then
-        echo "external.rotation: same-same" >> ${CONFIG_PATH}
+        add_rotation >> ${CONFIG_PATH}
     fi
 }
 
@@ -87,6 +94,8 @@ EOF
     cat <<EOF
 clientmethod: none
 socksmethod: pam.username none
+
+external.rotation: same-same
 
 user.privileged: root
 user.notprivileged: sockd
