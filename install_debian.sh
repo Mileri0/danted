@@ -79,6 +79,7 @@ generate_config_static(){
     cat <<EOF
 method: pam none
 clientmethod: none
+external.rotation: same-same
 user.privileged: root
 user.notprivileged: sockd
 logoutput: /var/log/sockd.log
